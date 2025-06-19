@@ -1,44 +1,25 @@
-# encoding: UTF-8
+# web.rb
 
-# === Required Libraries ===
-require 'json'
-require 'rubygems'
-require 'telegram/bot'
-require 'yaml/store'
-require 'colorize'
-require 'securerandom'
+require_relative './plugins'
 
-# === Load Config ===
-config_path = 'config.json'
-@config = JSON.parse(File.read(config_path))
-V = @config["Version"]
-
-# === Game Databases ===
-db = YAML::Store.new('Game.yml')
-bd = YAML::Store.new('banned.yml')
-cn = YAML::Store.new('clans.yml')
-
-# === Bot Token ===
-token = @config["Token"]
-
-# === Run Bot ===
 Telegram::Bot::Client.run(token) do |bot|
   puts "#{@config["BotName"]} #{V} تم تشغيل بوت اللعبة بنجاح".on_yellow
 
   begin
     bot.listen do |message|
-      # Handle Plugins
       bd.transaction do
         db.transaction do
           cn.transaction do
             begin
-              require_relative './plugins/setting'
-              require_relative './plugins/levels'
-              require_relative './plugins/attack'
-              require_relative './plugins/store'
-              require_relative './plugins/support'
-            rescue LoadError => e
-              puts "[PLUGIN ERROR] فشل في تحميل أحد الملفات: #{e.message}".on_red
+              # استدعاء الدوال من plugins.rb لكل رسالة
+              Plugins.setting(bot, message, db, bd, cn, @config, V)
+              Plugins.levels(bot, message, db)
+              Plugins.attack(bot, message, db, bd, cn, @config)
+              Plugins.store(bot, message, db, bd, @config)
+              Plugins.support(bot, message, db, bd, @config)
+              Plugins.clans(bot, message, db, bd, cn, @config)
+            rescue => e
+              puts "[PLUGIN ERROR] #{e.message}".on_red
             end
           end
         end
@@ -53,6 +34,3 @@ Telegram::Bot::Client.run(token) do |bot|
     retry
   end
 end
-
-# Designed by Humam Muhammed
-# Usage: TELEGRAM_BOT_POOL_SIZE=16 ruby bot.rb
