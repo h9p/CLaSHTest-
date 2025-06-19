@@ -1,7 +1,7 @@
 # plugins.rb
 
 module Plugins
-  def self.setting(bot, message, db, bd, cn, config, V)
+  def self.setting(bot, message, db, bd, cn, config, v)
     return if bd[message.from.id] || config["bban"].include?(message.from.id)
 
     if config["Devlopers"].include?(message.from.id)
@@ -36,9 +36,9 @@ module Plugins
     if config["Admins"].include?(message.from.id)
       case message.text
       when "#المطور"
-        bot.api.send_message(chat_id: message.chat.id, text: "⚔Clash Of Fire #{V}⚔\nBy @ihumam1")
+        bot.api.send_message(chat_id: message.chat.id, text: "⚔Clash Of Fire #{v}⚔\nBy @ihumam1")
       when "شنو هاي اللعبة"
-        bot.api.send_message(chat_id: message.chat.id, text: "⚔Clash Of Fire #{V}⚔\n ⚔ لعبة حربية رائعة على التلغرام ⚔")
+        bot.api.send_message(chat_id: message.chat.id, text: "⚔Clash Of Fire #{v}⚔\n ⚔ لعبة حربية رائعة على التلغرام ⚔")
       end
 
       case message.text
@@ -187,7 +187,7 @@ module Plugins
 
     bot.api.send_message(
       chat_id: message.chat.id,
-      text: "⚔بدأت الحرب بين⚔\n#{attacker.first_name} #{attacker.last_name}\nVS\n#{defender.first_name} #{defender.last_name}\n"
+      text: "⚔بدأت الحرب بين⚔\n#{attacker.first_name} #{attacker.last_name}\nvS\n#{defender.first_name} #{defender.last_name}\n"
     )
     puts "#{attacker.username} Attacks on #{defender.username}".on_red
 
