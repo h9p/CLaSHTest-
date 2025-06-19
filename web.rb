@@ -1,6 +1,10 @@
 # web.rb
 
 require_relative './plugins'
+require 'telegram/bot'
+require 'json'
+require 'yaml/store'
+require 'colorize'
 
 Telegram::Bot::Client.run(token) do |bot|
   puts "#{@config["BotName"]} #{V} تم تشغيل بوت اللعبة بنجاح".on_yellow
