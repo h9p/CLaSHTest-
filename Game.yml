@@ -1,0 +1,43 @@
+---
+211734090:
+  Power: 150
+  Defanse: 80
+  res: 600
+  Gems: 60
+  Attacks: 0
+  Wins: 0
+  Loses: 0
+  Defanse_a: 0
+  dd_win: 0
+  dd_loses: 0
+  level: 1
+  Shield: true
+  clan: none
+139680183:
+  Power: 400
+  Defanse: 120
+  res: 600
+  Gems: 120
+  Attacks: 0
+  Wins: 0
+  Loses: 0
+  Defanse_a: 0
+  dd_win: 0
+  dd_loses: 0
+  level: 2
+  Shield: true
+  clan: none
+137348382:
+  Power: 400
+  Defanse: 100
+  res: 600
+  Gems: 69870
+  Attacks: 0
+  Wins: 0
+  Loses: 0
+  Defanse_a: 0
+  dd_win: 0
+  dd_loses: 0
+  level: 2
+  Shield: true
+  clan: none
